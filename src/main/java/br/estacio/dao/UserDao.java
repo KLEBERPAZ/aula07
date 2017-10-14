@@ -8,4 +8,5 @@ public interface UserDao extends Serializable {
 	public User save(User user);
 	public void delete(Long id);
 	public Iterable<User> findAll();
+	public User findByEmail(String email);
 }

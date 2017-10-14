@@ -1,12 +1,17 @@
 package br.estacio.model;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -31,6 +36,9 @@ public class User {
 	@NotNull
 	@Column(length = 10, nullable = false)
 	private String Estado;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 	
 	@Version
 	@Column(nullable = false)
@@ -123,13 +131,27 @@ public class User {
 		this.timestamp = timestamp;
 	}
 
+	/**
+	 * @return the userProfiles
+	 */
+	public Set<UserProfile> getUserProfiles() {
+		return userProfiles;
+	}
+
+	/**
+	 * @param userProfiles the userProfiles to set
+	 */
+	public void setUserProfiles(Set<UserProfile> userProfiles) {
+		this.userProfiles = userProfiles;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", pwd=" + pwd + ", Estado=" + Estado
-				+ ", timestamp=" + timestamp + "]";
+				+ ", userProfiles=" + userProfiles + ", timestamp=" + timestamp + "]";
 	}
 
 

@@ -11,12 +11,7 @@ import br.estacio.model.User;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3951326895743325749L;
-
-	
+		
 	private UserDao dao;
 
 	@Autowired
@@ -37,6 +32,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Iterable<User> findAll() {
 		return dao.findAll();
+	}
+
+	@Override
+	public User findByEmail(String email) {
+		return dao.findByEmail(email);
 	}
 
 }
